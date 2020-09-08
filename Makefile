@@ -1,11 +1,17 @@
+DOCKER_TAG = drone-pre-commit-$(USER)
+
 .PHONY: clean
 
 .PHONY: default
 default: test
 
 .PHONY: test
-test:
-	@echo noop
+test: build
+	docker run --rm -v $(shell pwd):/src:ro --workdir /src $(DOCKER_TAG) ./tests/steps.sh
+
+.PHONY: build
+build: ./Dockerfile
+	docker build -t $(DOCKER_TAG) .
 
 .PHONY: install-hooks
 install-hooks:
