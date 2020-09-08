@@ -1,0 +1,42 @@
+---
+kind: pipeline
+name: deploy
+
+steps:
+
+  - name: push base image
+    image: plugins/docker
+    settings:
+      repo: iamthefij/drone-pre-commit
+      tags:
+        - latest
+        - base
+      username:
+        from_secret: docker_username
+      password:
+        from_secret: docker_password
+
+---
+kind: pipeline
+name: notify
+
+depends_on:
+  - test
+  - publish
+
+trigger:
+  status:
+    - failure
+
+steps:
+
+  - name: notify
+    image: drillster/drone-email
+    settings:
+      host:
+        from_secret: SMTP_HOST  # pragma: whitelist secret
+      username:
+        from_secret: SMTP_USER  # pragma: whitelist secret
+      password:
+        from_secret: SMTP_PASS  # pragma: whitelist secret
+      from: drone@iamthefij.com
