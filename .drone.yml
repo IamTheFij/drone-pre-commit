@@ -21,8 +21,7 @@ kind: pipeline
 name: notify
 
 depends_on:
-  - test
-  - publish
+  - deploy
 
 trigger:
   status:
