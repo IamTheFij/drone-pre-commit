@@ -1,0 +1,8 @@
+ARG BASE_IMAGE=iamthefij/drone-pre-commit
+FROM ${BASE_IMAGE}:base
+
+# Add helper scripts
+COPY ./scripts /scripts
+
+# Bundle hadolint
+RUN /scripts/add_hadolint.sh

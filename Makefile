@@ -12,6 +12,11 @@ test: build
 .PHONY: build
 build: ./Dockerfile
 	docker build -t $(DOCKER_TAG) .
+	docker tag "$(DOCKER_TAG):latest" "$(DOCKER_TAG):base"
+
+.PHONY: build-personal
+build-personal: build ./Dockerfile.personal
+	docker build --build-arg "BASE_IMAGE=$(DOCKER_TAG)" -f ./Dockerfile.personal .
 
 .PHONY: install-hooks
 install-hooks:

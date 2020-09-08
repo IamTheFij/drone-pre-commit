@@ -16,6 +16,18 @@ steps:
       password:
         from_secret: docker_password
 
+  - name: push personal image
+    image: plugins/docker
+    settings:
+      repo: iamthefij/drone-pre-commit
+      dockerfile: ./Dockerfile.personal
+      tags:
+        - personal
+      username:
+        from_secret: docker_username
+      password:
+        from_secret: docker_password
+
 ---
 kind: pipeline
 name: notify
