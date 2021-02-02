@@ -1,4 +1,5 @@
 #! /bin/bash
+set -ex
 
 VERSION=v1.35.2
 

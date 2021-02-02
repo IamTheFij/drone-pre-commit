@@ -1,14 +1,13 @@
 ARG BASE_IMAGE=iamthefij/drone-pre-commit
 FROM ${BASE_IMAGE}:base
 
-RUN apt-get update && \
-        apt-get install -y --no-install-recommends golang=2:1.11~1 && \
-        apt-get clean && \
-        rm -rf /var/lib/apt/lists/*
-
 # Add helper scripts
 COPY ./scripts /scripts
 
-# Bundle hadolint
+# Add golang
+RUN /scripts/add_golang.sh
+ENV PATH=$PATH:/usr/local/go/bin
+
+# Add some other linters
 RUN /scripts/add_hadolint.sh
 RUN /scripts/add_golangci_lint.sh
