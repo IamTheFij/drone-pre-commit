@@ -6,3 +6,4 @@ COPY ./scripts /scripts
 
 # Bundle hadolint
 RUN /scripts/add_hadolint.sh
+RUN /scripts/add_golangci_lint.sh
