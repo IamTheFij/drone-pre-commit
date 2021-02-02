@@ -16,7 +16,11 @@ build: ./Dockerfile
 
 .PHONY: build-personal
 build-personal: build ./Dockerfile.personal
-	docker build --build-arg "BASE_IMAGE=$(DOCKER_TAG)" -f ./Dockerfile.personal .
+	docker build \
+		--build-arg "BASE_IMAGE=$(DOCKER_TAG)" \
+		-f ./Dockerfile.personal \
+		-t "$(DOCKER_TAG):personal" \
+		.
 
 .PHONY: install-hooks
 install-hooks:
