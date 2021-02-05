@@ -1,4 +1,5 @@
 DOCKER_TAG = drone-pre-commit-$(USER)
+DOCKER_TAG_PERSONAL = $(DOCKER_TAG):personal
 
 .PHONY: clean
 
@@ -6,8 +7,8 @@ DOCKER_TAG = drone-pre-commit-$(USER)
 default: test
 
 .PHONY: test
-test: build
-	docker run --rm -v $(shell pwd):/src:ro --workdir /src $(DOCKER_TAG) ./tests/steps.sh
+test: build-personal
+	docker run --rm -v $(shell pwd):/src:ro --workdir /src $(DOCKER_TAG_PERSONAL)
 
 .PHONY: build
 build: ./Dockerfile
@@ -19,7 +20,7 @@ build-personal: build ./Dockerfile.personal
 	docker build \
 		--build-arg "BASE_IMAGE=$(DOCKER_TAG)" \
 		-f ./Dockerfile.personal \
-		-t "$(DOCKER_TAG):personal" \
+		-t "$(DOCKER_TAG_PERSONAL)" \
 		.
 
 .PHONY: install-hooks
@@ -31,4 +32,4 @@ check:
 	pre-commit run --all-files
 
 .PHONY: all
-all: check test build build-personal
+all: check test
