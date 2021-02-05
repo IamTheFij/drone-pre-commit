@@ -31,4 +31,4 @@ check:
 	pre-commit run --all-files
 
 .PHONY: all
-all: test check
+all: check test build build-personal
