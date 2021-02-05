@@ -29,7 +29,7 @@ steps:
 A second image is also built for my personal use, but it may be useful to you as well. This image includes the following dependencies:
 
   * hadolint
+  * golang
+  * golangci-lint
 
-## To Do
-
-So far this is basic and unopinionated. Either this will become very personal as I tack on dependencies for the hooks I often use, or it'll become complicated as I add args for everything and build out many tags. I think I'll probbably try to provide some reasonable base image that can then be extended in a new image or as part of one's build pipeline.
+Installation scripts referencing versions are found in `./scripts`.
