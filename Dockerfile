@@ -3,6 +3,6 @@ FROM python:3
 RUN mkdir -p /data/pre-commit-cache
 ENV PRE_COMMIT_HOME=/data/pre-commit-cache
 
-RUN pip install --no-cache-dir pre-commit==2.10.0
+RUN pip install --no-cache-dir pre-commit==2.10.1
 
 CMD ["pre-commit", "run", "--all-files"]
