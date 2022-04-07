@@ -1,11 +1,11 @@
 #! /bin/bash
 set -ex
 
-VERSION=1.16
-SHASUM=013a489ebb3e24ef3d915abe5b94c3286c070dfe0818d5bca8108f1d6e8440d2
+VERSION=1.18
+SHASUM=e85278e98f57cdb150fe8409e6e5df5343ecb13cebf03a5d5ff12bd55a80264f
 
 FILENAME=go${VERSION}.linux-amd64.tar.gz
-GOURL=https://golang.org/dl/${FILENAME}
+GOURL=https://go.dev/dl/${FILENAME}
 
 wget --quiet "$GOURL"
 

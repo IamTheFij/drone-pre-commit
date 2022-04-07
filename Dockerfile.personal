@@ -4,10 +4,7 @@ FROM ${BASE_IMAGE}:base
 # Add helper scripts
 COPY ./scripts /scripts
 
-# Add golang
-RUN /scripts/add_golang.sh
 ENV PATH=$PATH:/usr/local/go/bin
-
-# Add some other linters
-RUN /scripts/add_hadolint.sh
-RUN /scripts/add_golangci_lint.sh
+RUN /scripts/add_golang.sh && \
+        /scripts/add_hadolint.sh && \
+        /scripts/add_golangci_lint.sh
