@@ -1,8 +1,8 @@
 #! /bin/bash
 set -ex
 
-VERSION=1.19.3
-SHASUM=74b9640724fd4e6bb0ed2a1bc44ae813a03f1e72a4c76253e2d5c015494430ba
+VERSION=1.20.3
+SHASUM=979694c2c25c735755bf26f4f45e19e64e4811d661dd07b8c010f7a8e18adfca
 
 FILENAME=go${VERSION}.linux-amd64.tar.gz
 GOURL=https://go.dev/dl/${FILENAME}
