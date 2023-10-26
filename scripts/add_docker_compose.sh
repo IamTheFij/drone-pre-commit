@@ -3,7 +3,7 @@ set -ex
 
 VERSION=v2.23.0
 ARCH=x86_64
-FILENAME="docker-compose-darwin-${ARCH}"
+FILENAME="docker-compose-linux-${ARCH}"
 
 URL="https://github.com/docker/compose/releases/download/${VERSION}/${FILENAME}"
 SHAURL="https://github.com/docker/compose/releases/download/${VERSION}/${FILENAME}.sha256"
