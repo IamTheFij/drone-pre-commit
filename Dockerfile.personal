@@ -6,5 +6,6 @@ COPY ./scripts /scripts
 
 ENV PATH=$PATH:/usr/local/go/bin
 RUN /scripts/add_golang.sh && \
-        /scripts/add_hadolint.sh && \
-        /scripts/add_golangci_lint.sh
+    /scripts/add_hadolint.sh && \
+    /scripts/add_golangci_lint.sh && \
+    /scripts/add_docker_compose.sh
