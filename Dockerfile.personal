@@ -6,6 +6,7 @@ COPY ./scripts /scripts
 
 ENV PATH=$PATH:/usr/local/go/bin
 RUN /scripts/add_golang.sh && \
+    go install golang.org/x/tools/cmd/goimports@v0.16.1 && \
     /scripts/add_hadolint.sh && \
     /scripts/add_golangci_lint.sh && \
     /scripts/add_docker_compose.sh
