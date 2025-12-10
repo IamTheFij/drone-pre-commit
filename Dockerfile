@@ -1,5 +1,7 @@
 FROM python:3-alpine
 
+RUN apk add --no-cache git~=2
+
 ARG PRE_COMMIT_VERSION=4.5.0
 
 RUN mkdir -p /data/pre-commit-cache
