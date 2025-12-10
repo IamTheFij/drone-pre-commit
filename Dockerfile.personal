@@ -1,12 +1,25 @@
 ARG BASE_IMAGE=iamthefij/drone-pre-commit
 FROM ${BASE_IMAGE}:base
 
-# Add helper scripts
-COPY ./scripts /scripts
+ARG GOLANGCI_LINT_VERSION=2.7.2
+ARG GO_IMPORTS_VERSION=0.40.0
+ARG HADOLINT_VERSION=2.14.0
+ARG RELEASE_GITTER_VERSION=3.0.4
 
 ENV PATH=$PATH:/usr/local/go/bin
-RUN /scripts/add_golang.sh && \
-    go install golang.org/x/tools/cmd/goimports@v0.16.1 && \
-    /scripts/add_hadolint.sh && \
-    /scripts/add_golangci_lint.sh && \
-    /scripts/add_docker_compose.sh
+RUN apk add --no-cache go=~1.25 docker-cli-compose=~2 && \
+    go install golang.org/x/tools/cmd/goimports@v${GO_IMPORTS_VERSION} && \
+    pip install --no-cache-dir release-gitter==${RELEASE_GITTER_VERSION} && \
+    release-gitter --git-url \
+        "https://github.com/hadolint/hadolint" \
+        --version "${HADOLINT_VERSION}" \
+        --exec "mv {} hadolint && chmod +x hadolint" \
+        "hadolint-{system}-{arch}" \
+        /usr/bin && \
+    release-gitter --git-url \
+        "https://github.com/golangci/golangci-lint" \
+        --version "${GOLANGCI_LINT_VERSION}" \
+        --extract-files "golangci-lint-{version}-{system}-{arch}/golangci-lint" \
+        --exec "mv golangci-lint-{version}-{system}-{arch}/golangci-lint /usr/bin/golangci-lint && chmod +x /usr/bin/golangci-lint" \
+        --use-temp-dir \
+        "golangci-lint-{version}-{system}-{arch}.tar.gz"

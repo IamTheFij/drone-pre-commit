@@ -31,5 +31,4 @@ A second image is also built for my personal use, but it may be useful to you as
   * hadolint
   * golang
   * golangci-lint
-
-Installation scripts referencing versions are found in `./scripts`.
+  * goimports
